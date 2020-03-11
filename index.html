@@ -3,8 +3,8 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="branch:deeplink:productid" content="productTestingId" />
+  <!-- Hosted Deep Link Data -->
   <meta name="branch:deeplink:$deeplink_path" content="johnItem" />
-  <meta name="branch:deeplink:face" content="round" />
   <title>John Test Web App</title>
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <!-- Latest compiled and minified CSS -->
@@ -33,13 +33,13 @@
 		    '$og_title': 'Title',
 		    '$og_description': 'Description',
 		    '$og_image_url':'http://lorempixel.com/400/400'
-		 }
+		  }
     };
 
 
     branch.init('key_live_glHOUnKtkOMIVfyE0TMmQjmgvydv3vv0',{
     	metadata: branch_data,
-    	'john': 'johntest'
+    	'page': 'index'
     }, function(err, data){
     	console.log("Branch Init", err, data);
 
@@ -52,11 +52,6 @@
     });
   </script>
 
-  <!-- Hosted Deep Link Data -->
-<meta name="branch:deeplink:monster_name" content="JohnTestMonster"/>
-<meta name="branch:deeplink:face_index" content="1"/>
-<meta name="branch:deeplink:body_index" content="2">
-<meta name="branch:deeplink:color_index" content="3">
 
 </head>
 <body>

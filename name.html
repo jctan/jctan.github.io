@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Hosted Deep Link Data -->
+  <meta name="branch:deeplink:$deeplink_path" content="johnItem" />
+  <meta name="branch:deeplink:name" content="john" />
+  <title>John Test Web App</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script>
+    // load Branch
+    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking".split(" "), 0);
+
+
+    // init Branch
+    var branch_data = {
+    	'~channel': 'facetest',
+    	'$journeys_title': 'JohnTest_Journey_App',
+    	'campaign': 'content 123',
+    	'feature':'facebook',
+    	data: {
+		    'custom_bool': true,
+		    'custom_int': Date.now(),
+		    'custom_string': 'branch_custom_data',
+		    '$og_title': 'Title',
+		    '$og_description': 'Description',
+		    '$og_image_url':'http://lorempixel.com/400/400'
+		  }
+    };
+
+
+    branch.init('key_live_glHOUnKtkOMIVfyE0TMmQjmgvydv3vv0',{
+    	metadata: branch_data,
+    	'page': 'name'
+    }, function(err, data){
+    	console.log("Branch Init", err, data);
+    });
+  </script>
+
+
+</head>
+<body>
+	<div class="container-fluid">
+		<h3>NAME View</h3>
+
+	</div>
+
+
+	<!-- Branch javascript -->
+    <script>
+    
+
+    // Branch listener object that retrieves banner link data and prints it to console
+    var listener = function(event, data) {
+        console.log(event + ' fired at ' + Math.floor(Date.now() / 1000));
+        console.log('listener', data);
+    };
+    branch.addListener("willShowJourney", listener);
+    branch.addListener("didShowJourney", listener);
+    branch.addListener("willNotShowJourney", listener);
+    branch.addListener("didClickJourneyCTA", listener);
+    branch.addListener("didClickJourneyClose", listener);
+    branch.addListener("willCloseJourney", listener);
+    branch.addListener("didCloseJourney", listener);
+    branch.addListener("didCallJourneyClose", listener);
+
+
+	</script>
+
+</body>
+</html>
