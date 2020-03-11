@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="branch:deeplink:productid" content="productTestingId" />
+  <title>John Test Web App</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script>
+    // load Branch
+    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking".split(" "), 0);
+
+
+    // init Branch
+    var branch_data = {
+    	'~channel': 'johntest',
+    	'$journeys_title': 'JohnTest_Journey_App',
+    	'campaign': 'content 123',
+    	'feature':'facebook',
+    	data: {
+		    'custom_bool': true,
+		    'custom_int': Date.now(),
+		    'custom_string': 'branch_custom_data',
+		    '$og_title': 'Title',
+		    '$og_description': 'Description',
+		    '$og_image_url':'http://lorempixel.com/400/400'
+		 }
+    };
+
+
+    branch.init('key_live_glHOUnKtkOMIVfyE0TMmQjmgvydv3vv0',{
+    	metadata: branch_data,
+    	'john': 'johntest'
+    }, function(err, data){
+    	console.log("Branch Init", err, data);
+
+    	var bbpid = branch.B;
+    	$("#bbpid").html(bbpid);
+    	document.getElementById("branchData").innerHTML = JSON.stringify(data, undefined, 2);
+    	branch.data(function(err, data){
+    		console.log(err, data);
+    	});
+    });
+  </script>
+
+  <!-- Hosted Deep Link Data -->
+<meta name="branch:deeplink:monster_name" content="JohnTestMonster"/>
+<meta name="branch:deeplink:face_index" content="1"/>
+<meta name="branch:deeplink:body_index" content="2">
+<meta name="branch:deeplink:color_index" content="3">
+
+</head>
+<body>
+	<div class="container-fluid">
+		<h3>Branch Web SDK</h3>
+		<div class="row">
+			<div class="col-xs-12">
+				<label>Browser Fingerprint Id</label>
+				<pre id="bbpid"></pre>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<label>Branch Data from Init</label>
+				<pre id="branchData"></pre>
+			</div>
+		</div>
+
+		<div class="form-group">
+          <a class="btn btn-primary btn-lg btn-block" id="createDeepLink">Create Deep Link</a>
+      	</div>
+
+
+      	<div class="form-group">
+          <a class="btn btn-danger btn-lg btn-block" id="sendEvent">Send Custom Event</a>
+        </div>
+
+        <div class="form-group">
+            <label >UTM test link created from webssdk</label>
+            <input type="text" class="form-control" id="utm_link">
+            <a id="utmanchor">utm test link</a>
+        </div>
+
+        <div class="form-group">
+            <label >Generate Multiple Links With New Tabs (10)</label>
+            <a class="btn btn-warning btn-lg btn-block" id="multirun">Generate Links</a>
+        </div>
+
+        <div class="form-group">
+            <label >Update Journeys data</label>
+            <a class="btn btn-warning btn-lg btn-block" id="updateJourneyData">Update Journeys Data</a>
+        </div>
+
+	</div>
+
+
+	<!-- Branch javascript -->
+    <script>
+    
+
+    // Branch listener object that retrieves banner link data and prints it to console
+    var listener = function(event, data) {
+        console.log(event + ' fired at ' + Math.floor(Date.now() / 1000));
+        console.log('listener', data);
+    };
+    branch.addListener("willShowJourney", listener);
+    branch.addListener("didShowJourney", listener);
+    branch.addListener("willNotShowJourney", listener);
+    branch.addListener("didClickJourneyCTA", listener);
+    branch.addListener("didClickJourneyClose", listener);
+    branch.addListener("willCloseJourney", listener);
+    branch.addListener("didCloseJourney", listener);
+    branch.addListener("didCallJourneyClose", listener);
+
+
+    branch.setBranchViewData({
+      tags: [ 'EDM', 'V5849', 'Normal+EDM' ],
+      data: branch_data
+    });
+
+    branch.setIdentity('UUID123456', function (err, data) {
+      console.log(err, data);
+    });
+
+    if (performance.navigation.type == 1) {
+      console.info( "This page is reloaded" );
+    } else {
+      console.info( "This page is not reloaded");
+  	}
+    
+
+    
+    $(document).ready(function(){
+
+	    $('#createDeepLink').click(function(){
+	    	var linkData = {
+	    		campaign: 'content 1234',
+	    		channel: 'web',
+	    		feature: 'testing web',
+	    		stage: 'new user',
+	    		tags: ['tag1', 'tag2', 'tag3'],
+	    		alias: '',
+	    		data: {
+	    			'testing': 'window.open',
+	    			'params':{"i":"1","j":"3"},
+			        'custom_bool': true,
+			        'custom_int': Date.now(),
+			        'custom_string': 'This is deep link',
+			        '$og_title': 'DeepLinkTitle',
+			        '$og_description': 'DeepLinkDescription',
+			        '$og_image_url':'https://www.deeplink-medical.com/wp-content/uploads/2018/08/deep-link-logo-260x83px.png'
+	    		}
+	    	};
+	    	branch.link(linkData, function(err, link){
+	    		console.log('link', link);
+	    		window.open(link, '_blank');
+	    	});
+	    });
+	});
+
+  
+    $(document).ready(function(){
+	    $("#sendEvent").click(function(){
+	      branch.logEvent(
+	           "JourneyEventFired",
+	           { metadata: 'john123', sku: '12345678' },
+	           function(err) { 
+	            if(!err) {
+	              alert("event fired");
+	            } else {
+	             console.log(err); }
+	            }
+	      );
+	    });
+	});
+
+    $(document).ready(function(){
+      let url = "http://github.com/BranchMetrics",
+      param = "?a=b&utm_content=test_content&utm_term=test_term";
+      var linkData = {
+        campaign: 'utm_test_campaign',
+        channel: 'utm_test_channel',
+        feature: 'utm_test_feature',
+        data: {
+          "$desktop_url": url + param,
+          "$ios_url": url + param,
+          "$android_url": url + param,
+          "$canonical_url": url
+        }
+      };
+
+      branch.link(linkData, function(err, link) {
+        console.log(link);
+        $("#utm_link").val(link);
+        document.getElementById('utmanchor').href = link || err;
+      });
+    });
+
+    //#multi links opening test
+    $(document).ready(function(){
+      $("#multirun").click(function(){
+        for(var  i=0;i<10; i++){
+          setTimeout(function(){
+            var url = "http://github.com/BranchMetrics",
+            	param = "?a=b&utm_content=test_content&utm_term=test_term";
+            var linkData = {
+              campaign: 'utm_test_campaign',
+              channel: 'utm_test_channel',
+              feature: 'utm_test_feature',
+              data: {
+                "rs":Math.floor((Math.random() * 100000) + 1),
+                "$desktop_url": url + param,
+                "$ios_url": url + param,
+                "$android_url": url + param,
+                "$canonical_url": url
+              }
+            };
+
+            branch.link(linkData, function(err, link) {
+              console.log(link);
+              window.open(url,'_blank');
+            });
+          },5000);
+        }
+      })
+    });
+
+    $(document).ready(function(){
+	    $("#updateJourneyData").click(function(){
+	    	var linkData = {
+	    		'productid': 'JOHNTANID'
+	    	};
+		    console.log("setBranchViewData", linkData)
+		    branch.setBranchViewData(linkData);
+
+		    branch.track('pageview',{},{
+		       'disable_entry_animation' : true,
+		       'disable_exit_animation' : true
+		      });
+	    });
+	});
+
+
+	</script>
+
+</body>
+</html>
