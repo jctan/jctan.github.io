@@ -38,8 +38,10 @@
 
 
     branch.init('key_live_glHOUnKtkOMIVfyE0TMmQjmgvydv3vv0',{
-    	metadata: branch_data,
-    	'page': 'face'
+    	'page': 'face',
+       metadata : {
+          'is_logged_in' : 'true'
+       }
     }, function(err, data){
     	console.log("Branch Init", err, data);
     });

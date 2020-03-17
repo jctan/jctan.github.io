@@ -38,7 +38,9 @@
 
 
     branch.init('key_live_glHOUnKtkOMIVfyE0TMmQjmgvydv3vv0',{
-    	metadata: branch_data,
+    	metadata : {
+          'is_logged_in' : 'false'
+       }
     	'page': 'name'
     }, function(err, data){
     	console.log("Branch Init", err, data);
