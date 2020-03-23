@@ -74,6 +74,13 @@
     branch.addListener("didCloseJourney", listener);
     branch.addListener("didCallJourneyClose", listener);
 
+    branch.setBranchViewData({
+      data: {
+        '$journeys_title': 'name_journey',
+        'customName': 'johnName'
+      }
+    });
+
     branch.track('pageview',{},{
       'is_logged_out': 'true'
     });
